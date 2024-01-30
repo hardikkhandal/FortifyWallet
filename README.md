@@ -118,7 +118,7 @@ Group - 7
 - [Ujjwal Garg](https://www.linkedin.com/in/ujjwal-garg-3a5639243/)
 - [Jai Bhalla](https://www.linkedin.com/in/jai-bhalla-a59b06230/)
 - [Sajal Garg](https://www.linkedin.com/in/sajal-garg-053217277)
-- Shrey Katiyar
+- [Shrey Katiyar](https://www.linkedin.com/in/shrey-katiyar-66a023254)
 
 Project Link: [https://github.com/JaiBhalla03/FortifyWallet](https://github.com/JaiBhalla03/FortifyWallet)
 
