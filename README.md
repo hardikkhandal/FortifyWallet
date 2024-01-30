@@ -1,41 +1,158 @@
-# Multi Signature Wallet
+<a id="readme-top"></a>
 
-Multi signature wallet contract in Solidity. Requires multiple signatures from different owners for transacting. [See here.](https://en.wikipedia.org/wiki/Multisignature)
-[Deployment Url](https://fortify-wallet.vercel.app)
+<!-- PROJECT SHIELDS -->
 
-# Instructions (pure contract invocation in Remix, solidity)
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
 
-This contract requires multiple arguments for functions, including the constructor (deploying the contract.) In [Remix](https://remix.ethereum.org), click the upside down arrow and you will see you can put each argument for the constructor.
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/JaiBhalla03/FortifyWallet">
+    <img src="demo/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-![image](https://user-images.githubusercontent.com/92566574/165650833-264613ca-8d47-41ef-8b91-f08e9ccdc9a1.png)
+  <h3 align="center">FortifyWallet - Multisig-Wallet</h3>
 
-Put your address in an array format with double quotes in the `_owners` argument, as shown in example below. ex. `["0x......address1", "0x......address2", 0x......address2"]`. `_required` is the nessescary approvals from owners / digital signatures to execute a transaction. For instance, if you have 3 owners, you could have 2 or 3 required approvals to execute. Click 'transact' to deploy contract. Notice how I have no value being sent as I deploy this contract.
+  <p align="center">
+	Multi signature wallet contract in Solidity. Requires multiple signatures from different owners for transacting. projects!
+    <br />
+    <br />
+    <a href="https://fortify-wallet.vercel.app/">View Demo</a>
+    ·
+    <a href="https://github.com/JaiBhalla03/FortifyWallet/issues">Report Bug</a>
+  </p>
+</div>
 
-![image](https://user-images.githubusercontent.com/92566574/165653161-e0658499-e4fc-4950-98ba-f8303efee224.png)
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-Notice that we have deployed with no value (as adding value when deploying will result in an error). For other owners to approve, execute function calls etc, they will 'Load contract from address' and paste the instance of the contract.
-![image](https://user-images.githubusercontent.com/92566574/165653649-77731e72-4192-43cd-b07b-f0454a0eff6d.png)
+<!-- ABOUT THE PROJECT -->
 
-Paste your EOA (metamask address) in `isOwner` to see if the address is an owner or not. (isOwner = true)
-![image](https://user-images.githubusercontent.com/92566574/165654188-b3199597-d487-4cc6-9280-eb50a8461900.png)
+## About The Project
 
-Now, as one of the owners, we can `submit`, `approve`, `revoke`, and `execute`. To submit a transaction, we can first load the contract with ether by calling the fallback recieve function, and or just call the `submit` function with some ether if you didn't send ether using the fallback. Unfortunately we have to put Wei as the unit for the `submit` function. [See ether unit converter here.](https://eth-converter.com/)
-![image](https://user-images.githubusercontent.com/92566574/165654417-70de78bb-53a4-4044-a56c-c445130aebba.png)
+[![Multisig Desktop Screenshot][product-screenshot]](https://fortify-wallet.vercel.app/)
 
-![image](https://user-images.githubusercontent.com/92566574/165654673-41a032c1-9e30-47ec-94b9-a137f7bf285a.png)
+The Multisig Wallet project is a secure and flexible solution for managing cryptocurrency funds through a multi-signature wallet system. This open-source wallet is designed to enhance the security of digital asset management by requiring multiple private keys to authorize a transaction.
 
-![image](https://user-images.githubusercontent.com/92566574/165654826-8e36b8c4-abe6-4ac6-9052-52e8135768c5.png)
+### Key Features
 
-After you complete the submit call, the function with emit a `txId` as an index (0 being first transaction, 1 being second). The `txId` is called as an argument for the approve, revoke and execute function when you call them.
+- **Multi-Signature Security:** Utilizes a [M-of-N] signature scheme for enhanced security.
+- **User-Friendly Interface:** Intuitive and easy-to-use interface for managing wallet transactions.
+- **Compatibility:** Supports various cryptocurrencies, including [list of supported cryptocurrencies].
+- **Customizable Configuration:** Users can configure the required number of signatures for transaction approval.
 
-![image](https://user-images.githubusercontent.com/92566574/165667433-d76fbf19-450c-4209-a710-fcd8f1739bbe.png)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-As mentioned before, put the index of `txId` in approve, and submit (or revoke). There must be as many approvals as there was `_required` declared in the constructor. (if there was '2' in `_required`, there must be 2 approve calls from different owners.)
+### Built With
 
-![image](https://user-images.githubusercontent.com/92566574/165667875-223347ef-8aad-410e-a9c7-fd82775ddd19.png)
+- [![Svelte][Svelte.dev]][Svelte-url]
+- [![Vite][Vite.dev]][Vite-url]
+- [![Tailwindcss][Tailwindcss.com]][Tailwindcss-url]
+- [![Ethers][Ethers.js]][Ethers-url]
 
-After the required amount of approvals have been met, any owner can call the execute function with the `txId`.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-![image](https://user-images.githubusercontent.com/92566574/165668016-a24a7e3e-7fae-4e0a-8a66-d77fbe605561.png)
+<!-- GETTING STARTED -->
 
-If you have followed the steps above, you have successfully created a transaction with a multi-sig wallet.
+## Getting Started
+
+### Prerequisites
+
+- node v20.x
+
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/JaiBhalla03/FortifyWallet.git
+   ```
+2. Install NPM packages via yarn
+   ```sh
+   yarn install
+   ```
+3. Run frontend on your machine
+   ```sh
+   yarn dev
+   ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LICENSE -->
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTACT -->
+
+## Contact
+
+Group - 7
+
+- [Ujjwal Garg](https://www.linkedin.com/in/ujjwal-garg-3a5639243/)
+- [Jai Bhalla](https://www.linkedin.com/in/jai-bhalla-a59b06230/)
+- [Sajal Garg](https://www.linkedin.com/in/sajal-garg-053217277)
+- Shrey Katiyar
+
+Project Link: [https://github.com/JaiBhalla03/FortifyWallet](https://github.com/JaiBhalla03/FortifyWallet)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGMENTS -->
+
+## Acknowledgments
+
+- [Fullstack Dapp using Solidity, React JS YT Tutorial](https://www.youtube.com/watch?v=NxDGHynpA4s&t=2007s)
+- [Multisig Wallet using Solidity YT Tutorial](https://www.youtube.com/watch?v=uoQhMFAZ6V0&t=2354s)
+- [Multisig Wallet Explained YT](https://www.youtube.com/watch?v=E47Ih7DArKs&t=17s)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/JaiBhalla03/FortifyWallet.svg?style=for-the-badge
+[contributors-url]: https://github.com/JaiBhalla03/FortifyWallet/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/JaiBhalla03/FortifyWallet.svg?style=for-the-badge
+[forks-url]: https://github.com/JaiBhalla03/FortifyWallet/network/members
+[stars-shield]: https://img.shields.io/github/stars/JaiBhalla03/FortifyWallet.svg?style=for-the-badge
+[stars-url]: https://github.com/JaiBhalla03/FortifyWallet/stargazers
+[issues-shield]: https://img.shields.io/github/issues/JaiBhalla03/FortifyWallet.svg?style=for-the-badge
+[issues-url]: https://github.com/JaiBhalla03/FortifyWallet/issues
+[license-shield]: https://img.shields.io/github/license/JaiBhalla03/FortifyWallet.svg?style=for-the-badge
+[license-url]: https://github.com/JaiBhalla03/FortifyWallet/blob/master/LICENSE
+[product-screenshot]: demo/screenshot.png
+[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
+[Svelte-url]: https://svelte.dev/
+[Ethers.js]: https://img.shields.io/badge/Ethereum-3C3C3D?style=for-the-badge&logo=Ethereum&logoColor=white
+[Ethers-url]: https://docs.ethers.org/v5/
+[Tailwindcss.com]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
+[Tailwindcss-url]: https://tailwindcss.com/
+[Vite.dev]: https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E
+[Vite-url]: https://vitejs.dev/
