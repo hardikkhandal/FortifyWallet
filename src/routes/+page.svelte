@@ -121,7 +121,7 @@ function handleSubmit(event) {
     Message:
     <textarea bind:value={formData.description}></textarea>
   </label>
-  <button type="submit">Submit</button>
+  <button type="submit" id="formbut">Submit</button>
 </form>
 {/if}
 
@@ -165,6 +165,9 @@ function handleSubmit(event) {
     main{
       padding: 20vh;
     }
+    #formbut{
+      background-color:black;
+    }
   /* Style the form container */
   .form-container {
     max-width: 400px; /* Adjust as needed */
@@ -185,6 +188,7 @@ function handleSubmit(event) {
   button {
     width: 100%;
     padding: 10px;
+    color:black;
     margin-bottom: 15px;
     border: 2px solid black; /* Black border */
     border-radius: 4px; /* Optional: Rounded corners */
@@ -200,7 +204,7 @@ function handleSubmit(event) {
 		margin-left:50px;
 	}
   button {
-    background-color: #4caf50; /* Green background color */
+    
     color: white;
     font-size: 16px;
     font-weight: bold;

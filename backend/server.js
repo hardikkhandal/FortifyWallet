@@ -10,15 +10,37 @@ const app = express();
 const MongoDB = async () => {
 	try {
 		const connc = await mongoose.connect(
-			'mongodb+srv://hardikkhandal:hardik@cluster0.bzmmk52.mongodb.net/?retryWrites=true&w=majority'
+			'mongodb+srv://hardikkhandal:hardik@cluster0.bzmmk52.mongodb.net/?retryWrites=true&w=majority',
+			{
+				socketTimeoutMS: 30000,
+				useNewUrlParser: true,
+				useUnifiedTopology: true
+			}
 		);
 
 		console.log(`MongoDB connected: ${connc.connection.host}`);
 	} catch (error) {
 		console.log(error.message);
-		process.exit();
+		process.exit(1); // Exit the process with error
 	}
 };
+
+// Listen for MongoDB connection events
+mongoose.connection.on('connected', () => {
+	console.log('MongoDB connected');
+});
+
+mongoose.connection.on('error', (err) => {
+	console.error(`MongoDB connection error: ${err}`);
+	process.exit(1); // Exit the process with error
+});
+
+mongoose.connection.on('disconnected', () => {
+	console.log('MongoDB disconnected');
+});
+
+// Call MongoDB function to connect to the database
+MongoDB();
 
 // Define a mongoose schema for the form data
 const FormDataSchema = new mongoose.Schema({
