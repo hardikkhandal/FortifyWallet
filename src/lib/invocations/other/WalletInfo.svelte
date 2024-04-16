@@ -19,6 +19,7 @@
     
     function clickHandler() {
 		isExpanded = !isExpanded
+        consoke.log("Wallet INfo")
         console.log(isExpanded)
 	}
 

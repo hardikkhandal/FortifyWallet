@@ -19,6 +19,7 @@
     
     function clickHandler() {
 		isExpanded = !isExpanded
+        console.log("Is working")
         console.log(isExpanded)
 	}
 </script>

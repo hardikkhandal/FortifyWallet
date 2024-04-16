@@ -1,21 +1,23 @@
-// server.js
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
+// Middleware
+app.use(cors()); // Enable CORS
+app.use(bodyParser.json()); // Parse JSON request bodies
 
 // Connect to MongoDB database
 const MongoDB = async () => {
 	try {
 		const connc = await mongoose.connect(
-			'mongodb+srv://hardikkhandal:hardik@cluster0.bzmmk52.mongodb.net/?retryWrites=true&w=majority',
-			{
-				socketTimeoutMS: 30000,
-				useNewUrlParser: true,
-				useUnifiedTopology: true
-			}
+			'mongodb+srv://hardikkhandal:hardik@cluster0.bzmmk52.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 		);
 
 		console.log(`MongoDB connected: ${connc.connection.host}`);
@@ -53,9 +55,6 @@ const FormDataSchema = new mongoose.Schema({
 const FormData = mongoose.model('FormData', FormDataSchema);
 
 // Middleware to parse request body
-app.use(bodyParser.json());
-app.use(cors());
-
 // Endpoint to handle form submissions
 app.post('/api/submit-form', async (req, res) => {
 	try {
@@ -78,8 +77,31 @@ app.post('/api/submit-form', async (req, res) => {
 	}
 });
 
+// Endpoint to fetch form data
+app.get('/api/get-form-data', async (req, res) => {
+	try {
+		const formDataEntries = await FormData.find({});
+		res.json(formDataEntries);
+	} catch (error) {
+		console.error('Error fetching form data:', error);
+		res.status(500).json({ error: 'Failed to fetch form data' });
+	}
+});
+
+app.get('/', (req, res) => {
+	res.sendFile(__dirname + '/index.html');
+});
+
+// Endpoint to handle fetching form data
+
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
 	console.log(`Server listening on port ${PORT}`);
+});
+
+process.on('SIGINT', async () => {
+	await mongoose.connection.close();
+	console.log('MongoDB connection closed');
+	process.exit(0);
 });

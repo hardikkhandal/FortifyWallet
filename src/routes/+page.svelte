@@ -115,7 +115,7 @@ function handleSubmit(event) {
   </label>
   <label>
     Amount:
-    <input type="number" bind:value={formData.amount} />
+    <input type="float" bind:value={formData.amount} />
   </label>
   <label>
     Message:
